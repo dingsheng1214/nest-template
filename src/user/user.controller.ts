@@ -1,7 +1,16 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
-import { UserService } from './user.service';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Patch,
+  Post,
+} from '@nestjs/common';
+import { BusinessException } from 'src/common/exceptions/business.exceptions';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
+import { UserService } from './user.service';
 
 @Controller('user')
 export class UserController {
@@ -14,6 +23,12 @@ export class UserController {
 
   @Get()
   findAll() {
+    const a: any = {};
+    try {
+      console.log(a.b.c);
+    } catch (e) {
+      throw new BusinessException('参数错误');
+    }
     return this.userService.findAll();
   }
 

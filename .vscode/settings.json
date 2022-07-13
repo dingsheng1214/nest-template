@@ -1,5 +1,8 @@
 {
   "cSpell.words": [
     "Fastify"
-  ]
+  ],
+  "eslint.codeActionsOnSave.mode": "all",
+  "editor.formatOnSaveMode": "modificationsIfAvailable",
+  "files.autoSave": "onFocusChange"
 }
