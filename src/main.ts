@@ -10,13 +10,12 @@ import { TransformInterceptor } from './common/interceptors/transform.intercepto
 import { LoggerMiddleware } from './common/middleware/logger.middleware';
 import { Logger } from './common/utils/log4j';
 import { generateSwaggerDocument } from './common/utils/swagger';
-
 declare const module: any;
 
 async function bootstrap() {
   const app = await NestFactory.create<NestFastifyApplication>(
     AppModule,
-    new FastifyAdapter(),
+    new FastifyAdapter()
   );
   // 日志中间件
   app.use(LoggerMiddleware);
@@ -35,7 +34,7 @@ async function bootstrap() {
   await app.listen(3000);
   Logger.info(
     `Server listening at ${await app.getUrl()}`,
-    `RUNNING_ENV: ${process.env.NODE_ENV}`,
+    `RUNNING_ENV: ${process.env.NODE_ENV}`
   );
 }
 

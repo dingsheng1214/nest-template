@@ -9,10 +9,10 @@ import { getConfig } from 'src/common/utils/yaml';
     ConfigModule.forRoot({
       ignoreEnvFile: true, // 忽略 .env 文件
       isGlobal: true,
-      load: [getConfig],
+      load: [getConfig]
     }),
-    UserModule,
+    UserModule
   ],
-  providers: [],
+  providers: []
 })
 export class AppModule {}
