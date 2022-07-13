@@ -13,4 +13,4 @@ export const BUSINESS_ERROR_CODE = {
 
   // 用户已冻结
   USER_DISABLED: 10004,
-}
+};

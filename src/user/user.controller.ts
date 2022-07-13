@@ -3,18 +3,23 @@ import {
   Controller,
   Delete,
   Get,
+  Inject,
   Param,
   Patch,
   Post,
 } from '@nestjs/common';
-import { BusinessException } from 'src/common/exceptions/business.exceptions';
+import { ConfigService } from '@nestjs/config';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { UserService } from './user.service';
 
 @Controller('user')
 export class UserController {
-  constructor(private readonly userService: UserService) {}
+  @Inject()
+  private readonly userService: UserService;
+
+  @Inject()
+  private readonly configService: ConfigService;
 
   @Post()
   create(@Body() createUserDto: CreateUserDto) {
@@ -23,12 +28,6 @@ export class UserController {
 
   @Get()
   findAll() {
-    const a: any = {};
-    try {
-      console.log(a.b.c);
-    } catch (e) {
-      throw new BusinessException('参数错误');
-    }
     return this.userService.findAll();
   }
 
