@@ -1,12 +1,13 @@
 import { NestFactory } from '@nestjs/core';
 import {
   FastifyAdapter,
-  NestFastifyApplication,
+  NestFastifyApplication
 } from '@nestjs/platform-fastify';
 import { AppModule } from './app.module';
 import { BaseExceptionFilter } from './common/exceptions/filters/base.exception.filter';
 import { HttpExceptionFilter } from './common/exceptions/filters/http.exception.filter';
 import { TransformInterceptor } from './common/interceptors/transform.interceptor';
+import { generateSwaggerDocument } from './swagger';
 declare const module: any;
 
 async function bootstrap() {
@@ -23,6 +24,9 @@ async function bootstrap() {
     module.hot.accept();
     module.hot.dispose(() => app.close());
   }
+  // 生成 swagger 文档
+  generateSwaggerDocument(app);
+
   await app.listen(3000);
 }
 
