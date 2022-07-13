@@ -2,7 +2,7 @@ import { Module } from '@nestjs/common';
 import { UserModule } from './user/user.module';
 
 import { ConfigModule } from '@nestjs/config';
-import { getConfig } from 'utils';
+import { getConfig } from 'src/common/utils/yaml';
 
 @Module({
   imports: [

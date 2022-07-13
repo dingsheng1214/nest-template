@@ -6,13 +6,13 @@ import {
   Inject,
   Param,
   Patch,
-  Post,
+  Post
 } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
+import { BusinessException } from 'src/common/exceptions/business.exceptions';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { UserService } from './user.service';
-
 @Controller('user')
 export class UserController {
   @Inject()
@@ -28,6 +28,12 @@ export class UserController {
 
   @Get()
   findAll() {
+    const a: any = {};
+    try {
+      console.log(a.b.c);
+    } catch (error) {
+      throw new BusinessException('error');
+    }
     return this.userService.findAll();
   }
 

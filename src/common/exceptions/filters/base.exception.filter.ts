@@ -6,6 +6,7 @@ import {
   ServiceUnavailableException,
 } from '@nestjs/common';
 import { FastifyReply, FastifyRequest } from 'fastify';
+import { Logger } from 'src/common/utils/log4j';
 
 @Catch()
 export class BaseExceptionFilter<T> implements ExceptionFilter {
@@ -14,7 +15,7 @@ export class BaseExceptionFilter<T> implements ExceptionFilter {
     const response = ctx.getResponse<FastifyReply>();
     const request = ctx.getRequest<FastifyRequest>();
 
-    request.log.error(exception);
+    Logger.error(exception);
 
     // 非 HTTP 标准异常的处理。
     response.status(HttpStatus.SERVICE_UNAVAILABLE).send({
