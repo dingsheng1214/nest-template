@@ -1,5 +1,5 @@
-import Chalk from 'chalk';
-import * as dayjs from 'dayjs'; // 处理时间的工具
+import * as Chalk from 'chalk';
+import * as dayjs from 'dayjs';
 import * as Log4js from 'log4js';
 import * as Path from 'path';
 import * as StackTrace from 'stacktrace-js';
@@ -29,7 +29,7 @@ export class ContextTrace {
   ) {}
 }
 
-Log4js.addLayout('Awesome-nest', (logConfig: any) => {
+Log4js.addLayout('Nest', (logConfig: any) => {
   return (logEvent: Log4js.LoggingEvent): string => {
     let moduleName = '';
     let position = '';
@@ -56,9 +56,9 @@ Log4js.addLayout('Awesome-nest', (logConfig: any) => {
     // 日志组成部分
     const messageOutput: string = messageList.join(' ');
     const positionOutput: string = position ? ` [${position}]` : '';
-    const typeOutput = `[${logConfig.type}] ${logEvent.pid.toString()}   - `;
+    const typeOutput = `[${logConfig.type}] ${logEvent.pid.toString()}  - `;
     const dateOutput = `${dayjs(logEvent.startTime).format(
-      'YYYY-MM-DD HH:mm:ss'
+      'YYYY/MM/DD HH:mm:ss'
     )}`;
     const moduleOutput: string = moduleName
       ? `[${moduleName}] `
@@ -98,7 +98,7 @@ Log4js.configure(config);
 
 // 实例化
 const logger = Log4js.getLogger();
-logger.level = LoggerLevel.INFO;
+logger.level = LoggerLevel.TRACE;
 
 export class Logger {
   static trace(...args) {
@@ -136,6 +136,10 @@ export class Logger {
   static access(...args) {
     const loggerCustom = Log4js.getLogger('http');
     loggerCustom.info(Logger.getStackTrace(), ...args);
+  }
+
+  static msg(msg) {
+    logger.info(msg);
   }
 
   // 日志追踪，可以追溯到哪个文件、第几行第几列

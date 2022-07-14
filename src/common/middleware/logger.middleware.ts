@@ -13,10 +13,7 @@ export function LoggerMiddleware(
     Method: ${req.method}
     IP: ${req.ip}
     Status code: ${code}
-    Headers: ${JSON.stringify(req.headers)}
-    Params: ${JSON.stringify(req.params)}
-    Query: ${JSON.stringify(req.query)}
-    Body: ${JSON.stringify(req.body)} \n
+    Headers: ${JSON.stringify(req.headers)} \n
   `;
   next();
   // 根据状态码，进行日志类型区分

@@ -17,11 +17,12 @@ async function bootstrap() {
     AppModule,
     new FastifyAdapter()
   );
-  // 日志中间件
+
+  // 中间件-日志
   app.use(LoggerMiddleware);
-  // 封装统一返回
+  // 拦截器-封装统一返回
   app.useGlobalInterceptors(new TransformInterceptor());
-  // 注意先后顺序
+  // 过滤器-异常处理
   app.useGlobalFilters(new BaseExceptionFilter(), new HttpExceptionFilter());
   // HRM 热更新
   if (module.hot) {
@@ -32,10 +33,9 @@ async function bootstrap() {
   generateSwaggerDocument(app);
 
   await app.listen(3000);
-  Logger.info(
-    `Server listening at ${await app.getUrl()}`,
-    `RUNNING_ENV: ${process.env.NODE_ENV}`
-  );
+  Logger.msg(`Application is running on: ${await app.getUrl()}`);
+  Logger.msg(`Swagger is running on: ${await app.getUrl()}/api`);
+  Logger.msg(`Current NODE_ENV: ${process.env.NODE_ENV}`);
 }
 
 bootstrap();
