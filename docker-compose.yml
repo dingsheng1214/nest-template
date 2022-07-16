@@ -36,6 +36,21 @@ services:
     volumes:
       - ./docker-mongo-init.js:/docker-entrypoint-initdb.d/docker-mongo-init.js:ro
       - db:/var/lib/mongo/data
+  redis:
+    image: redis:6.2.0
+    restart: always
+    container_name: nest-demo-redis
+    # 端口映射
+    ports:
+      - 6379:6379
+    environment:
+      TZ: Asia/Shanghai
+      LANG: en_US.UTF-8
+    volumes:
+      # 配置文件
+      - ./docker-redis.conf:/etc/redis/redis.conf:rw
+      # 数据文件
+      - db:/var/lib/redis/data:rw
 volumes:
   db:
     driver: local

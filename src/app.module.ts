@@ -1,5 +1,6 @@
 import { Module } from '@nestjs/common';
 import { DatabaseModule } from './common/database/database.module';
+import { RedisModule } from './common/database/redis.module';
 import { UserModule } from './user/user.module';
 
 import { ConfigModule } from '@nestjs/config';
@@ -13,6 +14,7 @@ import { getConfig } from 'src/common/utils/yaml';
       isGlobal: true,
       load: [getConfig]
     }),
+    RedisModule.register(),
     UserModule
   ],
   providers: []

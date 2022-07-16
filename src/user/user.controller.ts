@@ -28,12 +28,6 @@ export class UserController {
 
   @Get()
   findAll() {
-    const a: any = {};
-    try {
-      console.log(a.b.c);
-    } catch (error) {
-      throw new BusinessException('error');
-    }
     return this.userService.findAll();
   }
 
