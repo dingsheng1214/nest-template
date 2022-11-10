@@ -16,6 +16,7 @@ export class RedisModule {
       store: redisStore,
       host: REDIS_CONFIG.host,
       port: REDIS_CONFIG.port,
+      ttl: 0,
       // auth_pass: REDIS_CONFIG.auth,
       db: REDIS_CONFIG.db
     });
